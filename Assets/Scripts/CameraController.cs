@@ -10,26 +10,24 @@ public class CameraController : MonoBehaviour
     float xRot = 0f;
     public float mouseSensitivity = 100f;
 
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-    }
-
-    void Update()
+    void LateUpdate()
     {
         bool firstPerson = playerController.firstPerson;
         if (firstPerson)
         {
+            Cursor.lockState = CursorLockMode.Locked;
             FirstPersonUpdate();
         }
         else
         {
+            Cursor.lockState = CursorLockMode.None;
             ThirdPersonUpdate();
         }
     }
 
     void FirstPersonUpdate()
     {
+        transform.position = playerTransform.position + new Vector3(0f, 2f, 0f);
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
@@ -42,6 +40,8 @@ public class CameraController : MonoBehaviour
 
     void ThirdPersonUpdate()
     {
-
+        transform.position = playerTransform.position + new Vector3(13f, 24f, 0f);
+        transform.localRotation = Quaternion.Euler(new Vector3(60f, 0f, 0f));
+        transform.LookAt(playerTransform);
     }
 }

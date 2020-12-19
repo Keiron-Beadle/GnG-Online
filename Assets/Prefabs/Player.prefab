@@ -5370,6 +5370,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: -4671262914866206446}
+  thirdPersonCam: {fileID: 0}
+  firstPersonCam: {fileID: 0}
   firstPerson: 1
   speed: 9
 --- !u!1 &4023523742076998317
