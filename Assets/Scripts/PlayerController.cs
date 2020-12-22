@@ -5,12 +5,14 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController playerController;
+    public Animator animator; 
 
     public bool firstPerson = true;
 
     public float speed = 6f;
 
     private bool firstPersonLast;
+    private bool moving, prevMoving;
 
     private void Update()
     {
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
+        moving = Mathf.Abs(x + z) > 0 ? true : false;
         Vector3 move = Vector3.zero;
         switch (firstPerson)
         {
@@ -34,7 +37,16 @@ public class PlayerController : MonoBehaviour
                 ThirdPersonUpdate(move);
                 break;
         }
+        if (moving && !prevMoving)
+        {
+            animator.SetTrigger("Walk");
+        }
+        else if (!moving && prevMoving)
+        {
+            animator.SetTrigger("Idle");
+        }
         firstPersonLast = firstPersonCurrent;
+        prevMoving = moving;
     }
 
     void FirstPersonUpdate(Vector3 moveVector)
