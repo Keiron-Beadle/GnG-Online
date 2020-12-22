@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    public Camera playerCamera;
     public Transform playerTransform;
     public PlayerController playerController;
 
@@ -23,6 +24,16 @@ public class CameraController : MonoBehaviour
             Cursor.lockState = CursorLockMode.None;
             ThirdPersonUpdate();
         }
+    }
+
+    public void Enable()
+    {
+        playerCamera.enabled = true;
+    }
+
+    public void Disable()
+    {
+        playerCamera.enabled = false;
     }
 
     void FirstPersonUpdate()
